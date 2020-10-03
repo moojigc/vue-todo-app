@@ -7,6 +7,8 @@
 import { defineComponent } from "vue";
 import Input from "./components/Input.vue";
 
+document.title = 'To Do App';
+
 export default defineComponent({
   name: "App",
   components: {
