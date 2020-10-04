@@ -8,7 +8,9 @@
           type="text"
           placeholder="enter todo"
         />
-        <button type="submit">Add</button>
+        <button type="submit">
+          Add
+        </button>
       </div>
     </form>
     <ul id="todos">

@@ -24,8 +24,9 @@ export default defineComponent({
   box-sizing: border-box;
 }
 :root {
+  --default-font: "Raleway", Avenir, Helvetica, sans-serif;
   font-size: 20px;
-  font-family: "Raleway", Avenir, Helvetica, sans-serif;
+  font-family: var(--default-font);
   font-weight: 300;
   --safe: forestgreen;
   --danger: rgb(255, 97, 97);
@@ -38,6 +39,8 @@ h1 {
   margin: 1em 0;
 }
 button {
+  font-family: var(--default-font);
+  font-weight: 900;
   padding: 0.5rem 1rem;
   border: unset;
   border-radius: 3px;
