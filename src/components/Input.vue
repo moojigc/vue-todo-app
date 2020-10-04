@@ -20,10 +20,11 @@
           <i class="material-icons">{{
             todo.complete ? "check_box" : "check_box_outline_blank"
           }}</i>
+          <input type="checkbox" :checked="todo.complete" style="display: none">
         </div>
         <span :class="{ complete: todo.complete }">{{ todo.text }}</span>
         <div
-          @click="deleteTodo(todo)"
+          @click="deleteTodo(todos.indexOf(todo))"
           class="icon danger"
           style="margin-left: auto"
         >
@@ -63,14 +64,14 @@ export default {
 
     function updateTodo(todo: Todo) {
       todo.complete = !todo.complete;
-      
+
       handleStorage("todos", {
         todos: todos.value
       });
     }
 
     function deleteTodo(index: number) {
-      todos.value.splice(index);
+      todos.value.splice(index, 1);
       handleStorage("todos", { todos: todos.value });
     }
 
@@ -121,6 +122,8 @@ li {
     align-items: center;
     border-radius: 50%;
     transition: 250ms;
+    width: 26px;
+    height: 26px;
     cursor: pointer;
     &.safe {
       border: 1px solid var(--safe);
@@ -135,7 +138,8 @@ li {
     padding: 5px;
   }
   span {
-    margin-left: 0.5rem;
+    margin: 0 0.5rem;
+    word-break: break-all;
   }
 }
 
