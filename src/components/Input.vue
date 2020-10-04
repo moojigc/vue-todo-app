@@ -14,7 +14,7 @@
     <ul id="todos">
       <li v-for="todo in todos" v-bind:key="todo.id">
         <div
-          @click="updateTodo(todos.indexOf(todo))"
+          @click="updateTodo(todo)"
           :class="{ 'icon safe': todo.complete, 'icon danger': !todo.complete }"
         >
           <i class="material-icons">{{
@@ -48,9 +48,7 @@ export default {
   setup() {
     const storedTodos: Todo[] | null = handleStorage("todos")?.todos;
     const newTodo = ref("");
-    const todos = ref(
-      storedTodos || []
-    );
+    const todos = ref(storedTodos || []);
 
     function addTodo() {
       const newTodoData = {
@@ -63,17 +61,19 @@ export default {
       handleStorage("todos", { todos: todos.value });
     }
 
-    function updateTodo(index: number) {
+    function updateTodo(todo: Todo) {
+      todo.complete = !todo.complete;
+      
+      handleStorage("todos", {
+        todos: todos.value
+      });
+    }
+
+    function deleteTodo(index: number) {
       todos.value.splice(index);
       handleStorage("todos", { todos: todos.value });
     }
-    
-    function deleteTodo(todo: Todo) {
-      const newTodoArr = todos.value.filter(({ id }) => id !== todo.id);
-      todos.value = newTodoArr;
-      handleStorage("todos", { todos: newTodoArr });
-    }
-    
+
     return {
       newTodo,
       addTodo,
